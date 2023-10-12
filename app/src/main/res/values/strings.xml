@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">OpenApp</string>
+    <string name="general_button_close">Close</string>
+    <string name="general_button_go_back">Go back</string>
+    <string name="dashboard_network_error">Please check your connection</string>
+    <string name="dashboard_user_dashboard">Dashboard</string>
+</resources>
