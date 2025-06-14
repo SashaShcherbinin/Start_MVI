@@ -12,9 +12,11 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.mapNotNull
+import kotlinx.coroutines.flow.onCompletion
 import kotlinx.coroutines.flow.onEach
-import kotlinx.coroutines.flow.onSubscription
 import kotlinx.coroutines.flow.shareIn
+import kotlin.reflect.KClass
 
 interface Mvi<INTENT, EVENT, STATE> {
     val state: Flow<STATE>
@@ -53,29 +55,38 @@ open class MviViewModel<INTENT : Intent, EFFECT : Effect, EVENT : Event, STATE :
 ) : ViewModel(), Mvi<INTENT, EVENT, STATE> {
 
     private val _state: MutableStateFlow<STATE> = MutableStateFlow(defaultState)
-    private val _event: MutableSharedFlow<EVENT> = MutableSharedFlow(replay = 1000)
+    private val _event: MutableSharedFlow<Consumable<EVENT>> = MutableSharedFlow(replay = 1000)
 
-    private val intentJobMap = mutableMapOf<INTENT, Job>()
+    private val intentJobMap = mutableMapOf<KClass<out INTENT>, Job>()
 
     override val state = _state.asStateFlow()
     override val event = _event
-        .onSubscription { _event.resetReplayCache() }
+        .onCompletion { _event.resetReplayCache() }
+        .mapNotNull { it.consume() }
         .shareIn(
             scope = viewModelScope,
             started = SharingStarted.WhileSubscribed(),
         )
 
     override fun process(intent: INTENT) {
-        intentJobMap[intent]?.cancel()
+        intentJobMap[intent::class]?.cancel()
         val job = processor.process(intent, _state.value)
             .onEach { effect: EFFECT ->
                 reducer.reduce(effect, _state.value)?.let { _state.value = it }
                 publisher?.publish(effect)?.let { event ->
-                    _event.emit(event)
+                    _event.emit(Consumable(event))
                 }
                 repeater?.repeat(effect, _state.value)?.let { process(it) }
             }
             .launchIn(viewModelScope)
-        intentJobMap[intent] = job
+        intentJobMap[intent::class] = job
+    }
+}
+
+class Consumable<T>(private var value: T?) {
+    fun consume(): T? {
+        val result = value
+        value = null
+        return result
     }
 }
