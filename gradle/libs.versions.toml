@@ -1,21 +1,21 @@
 [versions]
 java = "VERSION_21"
-android-targetSdk = "34"
-android-compileSdk = "34"
+android-targetSdk = "36"
+android-compileSdk = "36"
 android-minSdk = "23"
-android-gradle = "8.8.1"
+android-gradle = "8.13.1"
 
-coroutines = '1.9.0'
-compose = "1.7.8"
-koin = "3.5.6"
-kotlin = "2.0.20"
-ktor = "3.0.3"
+coroutines = '1.10.2'
+compose = "1.9.5"
+koin = "4.1.1"
+kotlin = "2.2.21"
+ktor = "3.3.2"
 
 [libraries]
 android-gradle = { module = "com.android.tools.build:gradle", version.ref = "android-gradle" }
 
-google-firebase-crashlytics-ktx = { module = "com.google.firebase:firebase-crashlytics-ktx", version = "19.4.0" }
-google-material = { module = "com.google.android.material:material", version = "1.12.0" }
+google-firebase-crashlytics-ktx = { module = "com.google.firebase:firebase-crashlytics-ktx", version = "19.4.4" }
+google-material = { module = "com.google.android.material:material", version = "1.13.0" }
 
 coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "coroutines" }
 
@@ -23,17 +23,17 @@ koin-android = { module = "io.insert-koin:koin-android", version.ref = "koin" }
 koin-compose = { module = "io.insert-koin:koin-androidx-compose", version.ref = "koin" }
 koin-core = { module = "io.insert-koin:koin-core", version.ref = "koin" }
 
-compose-navigation = { module = "androidx.navigation:navigation-compose", version = "2.8.7" }
-compose-material = { module = "androidx.compose.material3:material3", version = "1.3.1" }
+compose-navigation = { module = "androidx.navigation:navigation-compose", version = "2.9.6" }
+compose-material = { module = "androidx.compose.material3:material3", version = "1.4.0" }
 compose-preview = { module = "androidx.compose.ui:ui-tooling-preview", version.ref = "compose" }
 compose-tooling = { module = "androidx.compose.ui:ui-tooling", version.ref = "compose" }
 compose-ui = { module = "androidx.compose.ui:ui", version.ref = "compose" }
-compose-systemuicontroller = { module = "com.google.accompanist:accompanist-systemuicontroller", version = "0.32.0" }
-image-coil = { module = "io.coil-kt:coil-compose", version = "2.6.0"}
+compose-systemuicontroller = { module = "com.google.accompanist:accompanist-systemuicontroller", version = "0.36.0" }
+image-coil = { module = "io.coil-kt:coil-compose", version = "2.7.0"}
 
 kotlin-gradle = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
-kotlin-xml-builder = { module = "org.redundent:kotlin-xml-builder", version = "1.9.1" }
-kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version = "1.7.3" }
+kotlin-xml-builder = { module = "org.redundent:kotlin-xml-builder", version = "1.9.3" }
+kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version = "1.9.0" }
 
 ktor-client-core = { module = "io.ktor:ktor-client-core", version.ref = "ktor" }
 ktor-client-android = { module = "io.ktor:ktor-client-android", version.ref = "ktor" }
@@ -42,7 +42,7 @@ ktor-logging = { module = "io.ktor:ktor-client-logging", version.ref = "ktor" }
 ktor-serialization-json = { module = "io.ktor:ktor-serialization-kotlinx-json", version.ref = "ktor" }
 
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
-mockito-mockk = { module = "io.mockk:mockk", version = "1.13.16" }
+mockito-mockk = { module = "io.mockk:mockk", version = "1.14.6" }
 coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "coroutines" }
 
 [plugins]
@@ -50,7 +50,7 @@ common-android-application-module = { id = "android-application-module" }
 common-android-library-module = { id = "android-library-module" }
 common-kotlin-library-module = { id = "kotlin-library-module" }
 
-google-firebase-crashlytics = { id = "com.google.firebase.crashlytics", version = "3.0.3" }
+google-firebase-crashlytics = { id = "com.google.firebase.crashlytics", version = "3.0.6" }
 
 kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
 kotlin-copmose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
