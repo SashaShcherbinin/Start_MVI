@@ -1,14 +1,11 @@
 package app
 
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.compose.setContent
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.ProvidedValue
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.core.view.WindowCompat
 import androidx.fragment.app.FragmentActivity
 import androidx.navigation.NavController
@@ -24,8 +21,6 @@ import feature.splash.domain.navigation.NavSplash
 import feature.splash.presentation.SplashScreen
 import feature.user.domain.navigation.NavUser
 import feature.user.presentation.UserScreen
-import kotlinx.coroutines.launch
-import org.koin.compose.KoinContext
 
 class MainActivity : FragmentActivity() {
 
@@ -33,10 +28,8 @@ class MainActivity : FragmentActivity() {
         WindowCompat.setDecorFitsSystemWindows(window, false)
         super.onCreate(savedInstanceState)
         setContent {
-            KoinContext {
-                AppTheme {
-                    MainContent()
-                }
+            AppTheme {
+                MainContent()
             }
         }
     }
